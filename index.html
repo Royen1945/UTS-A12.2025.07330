@@ -52,7 +52,8 @@
 
     <main>
         <section class="hero-section" id="home" aria-labelledby="hero-title">
-            <video class="hero-video" autoplay muted loop playsinline aria-hidden="true">
+            <video class="hero-video" autoplay muted loop playsinline poster="img/hero-sports-car-poster.jpg" aria-hidden="true">
+                <source src="img/hero-sports-car.mp4" type="video/mp4">
                 <source src="img/LatarBelakang.mp4" type="video/mp4">
             </video>
             <div class="hero-shade"></div>
@@ -72,6 +73,8 @@
             <div class="hero-caption d-none d-md-flex" aria-hidden="true">
                 <span>01 / 03</span><span class="caption-rule"></span><span>DRIVE YOUR STORY</span>
             </div>
+            <a class="hero-video-credit" href="https://www.pexels.com/video/sports-car-driving-on-curvy-mountain-road-36223788/"
+                target="_blank" rel="noopener noreferrer" aria-label="Sumber video latar: Pexels">VIDEO: PEXELS <span aria-hidden="true">↗</span></a>
             <a class="scroll-cue" href="#experience" aria-label="Gulir ke pengalaman"><span></span> GULIR UNTUK MENJELAJAH</a>
         </section>
 
@@ -174,10 +177,16 @@
                         </button>
                         <p class="selector-hint"><span aria-hidden="true">↖</span> Pilih model untuk mengganti detail</p>
                     </div>
-                    <article class="car-showcase" id="carShowcase" aria-live="polite">
+                    <article class="car-showcase" id="carShowcase" role="region" aria-roledescription="carousel" aria-label="Galeri mobil" aria-live="polite">
                         <div class="car-image-wrap">
                             <img id="carImage" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Porsche_992_GT3_1X7A0323.jpg/1280px-Porsche_992_GT3_1X7A0323.jpg"
                                 alt="Porsche 911 GT3 generasi 992" loading="lazy">
+                            <button class="carousel-control carousel-control-previous" id="previousCar" type="button" aria-label="Mobil sebelumnya">
+                                <span aria-hidden="true">←</span>
+                            </button>
+                            <button class="carousel-control carousel-control-next" id="nextCar" type="button" aria-label="Mobil berikutnya">
+                                <span aria-hidden="true">→</span>
+                            </button>
                             <a class="image-label" id="carImageSource" href="https://commons.wikimedia.org/wiki/File:Porsche_992_GT3_1X7A0323.jpg"
                                 target="_blank" rel="noopener noreferrer"><span></span> SUMBER FOTO</a>
                             <span class="image-number" id="carNumber">01 / 09</span>
@@ -208,11 +217,54 @@
                                     <div>
                                         <strong id="trackType">Sirkuit teknis</strong>
                                         <span id="trackMeta">5,4 km · Tantangan menengah</span>
+                                        <span><b>Lintasan:</b> <span id="trackVenue">—</span></span>
+                                        <span><b>Lokasi:</b> <span id="trackLocation">—</span></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </article>
+                </div>
+                <div class="track-gallery" aria-labelledby="track-gallery-title">
+                    <div class="track-gallery-heading">
+                        <div>
+                            <p class="eyebrow"><span class="eyebrow-line"></span> JELAJAHI LINTASAN</p>
+                            <h3 id="track-gallery-title">DARI PEGUNUNGAN<br><span>HINGGA SIRKUIT.</span></h3>
+                        </div>
+                        <p>Intip beberapa lintasan ikonik dunia, lengkap dengan lokasi dan karakter tempatnya.</p>
+                    </div>
+                    <div class="track-gallery-grid">
+                        <a class="track-gallery-card" href="https://commons.wikimedia.org/wiki/File:2022_4_Hours_of_Spa-Francorchamps_-_Circuit.jpg" target="_blank" rel="noopener noreferrer">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/2022_4_Hours_of_Spa-Francorchamps_-_Circuit.jpg/960px-2022_4_Hours_of_Spa-Francorchamps_-_Circuit.jpg" alt="Suasana lintasan Circuit de Spa-Francorchamps" loading="lazy">
+                            <span class="track-gallery-count">01 / BELGIA</span>
+                            <span class="track-gallery-caption"><strong>Spa-Francorchamps</strong><small>Stavelot, Wallonia</small><small class="track-photo-credit">FOTO: UNITED AUTOSPORTS · CC BY-SA 2.0 ↗</small></span>
+                        </a>
+                        <a class="track-gallery-card" href="https://commons.wikimedia.org/wiki/File:LagunaSecaMay08.jpg" target="_blank" rel="noopener noreferrer">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/LagunaSecaMay08.jpg/960px-LagunaSecaMay08.jpg" alt="Pemandangan WeatherTech Raceway Laguna Seca" loading="lazy">
+                            <span class="track-gallery-count">02 / AMERIKA SERIKAT</span>
+                            <span class="track-gallery-caption"><strong>Laguna Seca</strong><small>Monterey County, California</small><small class="track-photo-credit">FOTO: GATEMAN1997 · CC BY-SA 3.0 ↗</small></span>
+                        </a>
+                        <a class="track-gallery-card" href="https://commons.wikimedia.org/wiki/File:Fuji_Speedway_start-finish.jpg" target="_blank" rel="noopener noreferrer">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Fuji_Speedway_start-finish.jpg/960px-Fuji_Speedway_start-finish.jpg" alt="Lintasan lurus start-finish Fuji Speedway dengan Gunung Fuji" loading="lazy">
+                            <span class="track-gallery-count">03 / JEPANG</span>
+                            <span class="track-gallery-caption"><strong>Fuji Speedway</strong><small>Oyama, Prefektur Shizuoka</small><small class="track-photo-credit">FOTO: MATSUOKA KOHEI · CC BY-SA 2.0 ↗</small></span>
+                        </a>
+                        <a class="track-gallery-card" href="https://commons.wikimedia.org/wiki/File:Tsukuba_Circuit_Aerial_photograph.2021.jpg" target="_blank" rel="noopener noreferrer">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Tsukuba_Circuit_Aerial_photograph.2021.jpg/960px-Tsukuba_Circuit_Aerial_photograph.2021.jpg" alt="Foto udara Tsukuba Circuit" loading="lazy">
+                            <span class="track-gallery-count">04 / JEPANG</span>
+                            <span class="track-gallery-caption"><strong>Tsukuba Circuit</strong><small>Shimotsuma, Prefektur Ibaraki</small><small class="track-photo-credit">FOTO: MLIT · SUMBER FOTO ↗</small></span>
+                        </a>
+                        <a class="track-gallery-card" href="https://commons.wikimedia.org/wiki/File:2010-Imola_RaceTrack_Auto.jpg" target="_blank" rel="noopener noreferrer">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/2010-Imola_RaceTrack_Auto.jpg/960px-2010-Imola_RaceTrack_Auto.jpg" alt="Peta tata letak Autodromo Enzo e Dino Ferrari, Imola" loading="lazy">
+                            <span class="track-gallery-count">05 / ITALIA</span>
+                            <span class="track-gallery-caption"><strong>Imola Circuit</strong><small>Peta sirkuit · Imola, Emilia-Romagna</small><small class="track-photo-credit">PETA: MARPOL · PUBLIC DOMAIN ↗</small></span>
+                        </a>
+                        <a class="track-gallery-card" href="https://commons.wikimedia.org/wiki/File:2015_BMW_M4_DTM_touring_race_car_at_Hockenheimring,_Germany_(Ank_Kumar,_Infosys_Limited)_02.jpg" target="_blank" rel="noopener noreferrer">
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/2015_BMW_M4_DTM_touring_race_car_at_Hockenheimring%2C_Germany_%28Ank_Kumar%2C_Infosys_Limited%29_02.jpg/960px-2015_BMW_M4_DTM_touring_race_car_at_Hockenheimring%2C_Germany_%28Ank_Kumar%2C_Infosys_Limited%29_02.jpg" alt="BMW M4 DTM melaju di Hockenheimring" loading="lazy">
+                            <span class="track-gallery-count">06 / JERMAN</span>
+                            <span class="track-gallery-caption"><strong>Hockenheimring</strong><small>Hockenheim, Baden-Württemberg</small><small class="track-photo-credit">FOTO: ANK KUMAR · CC BY-SA 4.0 ↗</small></span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>

@@ -63,6 +63,8 @@ const carOptions = document.querySelectorAll(".car-option");
 const carShowcase = document.querySelector("#carShowcase");
 const carImage = document.querySelector("#carImage");
 const carImageSource = document.querySelector("#carImageSource");
+const previousCarButton = document.querySelector("#previousCar");
+const nextCarButton = document.querySelector("#nextCar");
 const trackSelect = document.querySelector("#trackSelect");
 const trackInfo = document.querySelector("#trackInfo");
 const cars = {
@@ -239,6 +241,85 @@ const cars = {
     }
 };
 
+const trackLocations = {
+    "Spa-Francorchamps": {
+        venue: "Circuit de Spa-Francorchamps",
+        location: "Stavelot, Wallonia, Belgia"
+    },
+    "Laguna Seca": {
+        venue: "WeatherTech Raceway Laguna Seca",
+        location: "Monterey County, California, Amerika Serikat"
+    },
+    "Hakone Pass": {
+        venue: "Hakone Turnpike",
+        location: "Hakone, Prefektur Kanagawa, Jepang"
+    },
+    "Tsukuba Circuit": {
+        venue: "Tsukuba Circuit",
+        location: "Shimotsuma, Prefektur Ibaraki, Jepang"
+    },
+    "Coastal Run": {
+        venue: "Pacific Coast Highway",
+        location: "Pesisir California, Amerika Serikat"
+    },
+    "Fuji Speedway": {
+        venue: "Fuji Speedway",
+        location: "Oyama, Prefektur Shizuoka, Jepang"
+    },
+    "Autobahn Sprint": {
+        venue: "Rute Autobahn (rute representatif)",
+        location: "Jerman"
+    },
+    "Monza GP": {
+        venue: "Autodromo Nazionale Monza",
+        location: "Monza, Lombardy, Italia"
+    },
+    "Amalfi Coast Run": {
+        venue: "Strada Statale 163 Amalfitana",
+        location: "Pesisir Amalfi, Campania, Italia"
+    },
+    "Imola Circuit": {
+        venue: "Autodromo Internazionale Enzo e Dino Ferrari",
+        location: "Imola, Emilia-Romagna, Italia"
+    },
+    "Alpine Pass": {
+        venue: "Stelvio Pass",
+        location: "Tyrol Selatan, Italia"
+    },
+    "Nürburgring GP": {
+        venue: "Nürburgring Grand Prix Circuit",
+        location: "Nürburg, Rhineland-Palatinate, Jerman"
+    },
+    "Hockenheimring": {
+        venue: "Hockenheimring Baden-Württemberg",
+        location: "Hockenheim, Baden-Württemberg, Jerman"
+    },
+    "Black Forest Run": {
+        venue: "Schwarzwaldhochstraße (B500)",
+        location: "Black Forest, Baden-Württemberg, Jerman"
+    },
+    "Road America": {
+        venue: "Road America",
+        location: "Elkhart Lake, Wisconsin, Amerika Serikat"
+    },
+    "Pacific Coast Run": {
+        venue: "Pacific Coast Highway · Big Sur",
+        location: "Pesisir California, Amerika Serikat"
+    },
+    "Sebring International": {
+        venue: "Sebring International Raceway",
+        location: "Sebring, Florida, Amerika Serikat"
+    },
+    "Silverstone GP": {
+        venue: "Silverstone Circuit",
+        location: "Silverstone, Northamptonshire, Inggris"
+    },
+    "Highland Sprint": {
+        venue: "North Coast 500",
+        location: "Scottish Highlands, Skotlandia"
+    }
+};
+
 function renderTracks(car) {
     trackSelect.replaceChildren();
     car.tracks.forEach((track, index) => {
@@ -253,8 +334,11 @@ function renderTracks(car) {
 }
 
 function updateTrackInfo(track) {
+    const location = trackLocations[track.name];
     document.querySelector("#trackType").textContent = track.type;
     document.querySelector("#trackMeta").textContent = track.meta;
+    document.querySelector("#trackVenue").textContent = location.venue;
+    document.querySelector("#trackLocation").textContent = location.location;
     trackInfo.classList.remove("is-updating");
     requestAnimationFrame(() => trackInfo.classList.add("is-updating"));
 }
@@ -267,39 +351,50 @@ trackSelect.addEventListener("change", () => {
     }
 });
 
-carOptions.forEach((option) => {
-    option.addEventListener("click", () => {
-        const car = cars[option.dataset.car];
-        if (!car || option.classList.contains("is-active")) {
-            return;
-        }
+function selectCar(option) {
+    const car = cars[option.dataset.car];
+    if (!car || option.classList.contains("is-active")) {
+        return;
+    }
 
-        carOptions.forEach((item) => {
-            const isSelected = item === option;
-            item.classList.toggle("is-active", isSelected);
-            item.setAttribute("aria-pressed", String(isSelected));
-        });
-
-        document.querySelector("#carNumber").textContent = car.number;
-        document.querySelector("#carCategory").textContent = car.category;
-        document.querySelector("#carName").textContent = car.name;
-        document.querySelector("#carYear").textContent = car.year;
-        document.querySelector("#carEngine").textContent = car.engine;
-        document.querySelector("#carPower").textContent = car.power;
-        document.querySelector("#carAccel").textContent = car.acceleration;
-        document.querySelector("#carDrive").textContent = car.drivetrain;
-        document.querySelector("#carDescription").textContent = car.description;
-        carImage.alt = car.alt;
-        carImage.src = car.image;
-        carImageSource.href = car.source;
-        renderTracks(car);
-
-        carShowcase.classList.remove("is-changing");
-        requestAnimationFrame(() => {
-            carShowcase.classList.add("is-changing");
-        });
+    carOptions.forEach((item) => {
+        const isSelected = item === option;
+        item.classList.toggle("is-active", isSelected);
+        item.setAttribute("aria-pressed", String(isSelected));
     });
+
+    document.querySelector("#carNumber").textContent = car.number;
+    document.querySelector("#carCategory").textContent = car.category;
+    document.querySelector("#carName").textContent = car.name;
+    document.querySelector("#carYear").textContent = car.year;
+    document.querySelector("#carEngine").textContent = car.engine;
+    document.querySelector("#carPower").textContent = car.power;
+    document.querySelector("#carAccel").textContent = car.acceleration;
+    document.querySelector("#carDrive").textContent = car.drivetrain;
+    document.querySelector("#carDescription").textContent = car.description;
+    carImage.alt = car.alt;
+    carImage.src = car.image;
+    carImageSource.href = car.source;
+    renderTracks(car);
+
+    carShowcase.classList.remove("is-changing");
+    requestAnimationFrame(() => {
+        carShowcase.classList.add("is-changing");
+    });
+}
+
+carOptions.forEach((option) => {
+    option.addEventListener("click", () => selectCar(option));
 });
+
+function moveCarSelection(direction) {
+    const activeIndex = Array.from(carOptions).findIndex((option) => option.classList.contains("is-active"));
+    const nextIndex = (activeIndex + direction + carOptions.length) % carOptions.length;
+    selectCar(carOptions[nextIndex]);
+}
+
+previousCarButton.addEventListener("click", () => moveCarSelection(-1));
+nextCarButton.addEventListener("click", () => moveCarSelection(1));
 
 renderTracks(cars[document.querySelector(".car-option.is-active").dataset.car]);
 
