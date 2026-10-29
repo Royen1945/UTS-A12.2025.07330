@@ -282,72 +282,124 @@
                         </div>
                     </div>
                     <div class="col-lg-7">
-                        <form class="join-form" id="joinForm">
+                        <form class="join-form" id="joinForm" novalidate>
                             <div class="form-heading">
                                 <div>
                                     <p class="form-kicker">FORMULIR KOMUNITAS</p>
-                                    <h3>Mulai perjalananmu</h3>
+                                    <h3 id="formTitle">Profil pengendara</h3>
                                 </div>
-                                <span class="form-step">01 <i>/ 03</i></span>
+                                <span class="form-step" aria-live="polite"><span id="formStepNumber">01</span> <i>/ 02</i></span>
                             </div>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label" for="fullName">Nama lengkap</label>
-                                    <input class="form-control" id="fullName" name="fullName" type="text" value="Royen Hamonangan Parhusip" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label" for="email">Alamat email</label>
-                                    <input class="form-control" id="email" name="email" type="email" placeholder="nama@email.com" required>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label" for="tagInput">Tag minat <span class="label-hint">Tekan Enter untuk menambahkan</span></label>
-                                    <input class="form-control" id="tagInput" type="text" placeholder="Contoh: touring, klasik, modifikasi">
-                                    <div class="tag-list" id="tagList" aria-live="polite" aria-label="Daftar tag minat"></div>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label" for="story">Ceritakan perjalanan impianmu</label>
-                                    <textarea class="form-control" id="story" name="story" rows="3" placeholder="Rute mana yang ingin kamu jelajahi?"></textarea>
-                                </div>
-                                <fieldset class="col-12">
-                                    <legend class="form-label">Pilih pengalaman favorit</legend>
-                                    <div class="choice-row">
-                                        <label class="choice-option" for="motorsport">
-                                            <input type="radio" class="form-check-input" id="motorsport" name="experience" value="Motorsport" required>
-                                            <span>Motorsport</span>
-                                        </label>
-                                        <label class="choice-option" for="horizon">
-                                            <input type="radio" class="form-check-input" id="horizon" name="experience" value="Open road">
-                                            <span>Open road</span>
-                                        </label>
-                                        <label class="choice-option" for="both">
-                                            <input type="radio" class="form-check-input" id="both" name="experience" value="Keduanya">
-                                            <span>Keduanya</span>
-                                        </label>
-                                    </div>
-                                </fieldset>
-                                <div class="col-md-6">
-                                    <label class="form-label" for="vehicle">Kategori kendaraan</label>
-                                    <select class="form-select" id="vehicle" name="vehicle" required>
-                                        <option value="" selected disabled>Pilih kategori</option>
-                                        <option>Mobil sport</option>
-                                        <option>Mobil klasik</option>
-                                        <option>Motor</option>
-                                        <option>Kendaraan lainnya</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label" for="region">Lokasi berkendara</label>
-                                    <select class="form-select" id="region" name="region" required>
-                                        <option value="" selected disabled>Pilih area</option>
-                                        <option>Dalam kota</option>
-                                        <option>Jalan pegunungan</option>
-                                        <option>Sirkuit</option>
-                                        <option>Lintas kota</option>
-                                    </select>
-                                </div>
-                                <div class="col-12 form-actions">
-                                    <button class="btn btn-accent" type="submit">Kirim ceritaku <span aria-hidden="true">↗</span></button>
-                                    <p class="form-message mb-0" id="formMessage" role="status"></p>
+                            <div class="form-slider">
+                                <div class="form-slides">
+                                    <section class="form-slide" aria-labelledby="formTitle">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="fullName">Nama</label>
+                                                <input class="form-control" id="fullName" name="fullName" type="text" value="Royen Hamonangan Parhusip" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="city">Kota</label>
+                                                <select class="form-select" id="city" name="city" required>
+                                                    <option value="" selected disabled>Pilih kota</option>
+                                                    <option>Semarang</option>
+                                                    <option>Kudus</option>
+                                                    <option>Demak</option>
+                                                    <option>Pekalongan</option>
+                                                    <option>Tegal</option>
+                                                    <option>Surabaya</option>
+                                                    <option>Jakarta</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label" for="address">Alamat</label>
+                                                <textarea class="form-control" id="address" name="address" rows="3" placeholder="Masukkan alamat lengkap" required></textarea>
+                                            </div>
+                                            <fieldset class="col-12">
+                                                <legend class="form-label">Hobi</legend>
+                                                <div class="choice-row">
+                                                    <label class="choice-option" for="hobbyReading">
+                                                        <input type="checkbox" class="form-check-input" id="hobbyReading" name="hobbies" value="Membaca">
+                                                        <span>Membaca</span>
+                                                    </label>
+                                                    <label class="choice-option" for="hobbyCoding">
+                                                        <input type="checkbox" class="form-check-input" id="hobbyCoding" name="hobbies" value="Koding">
+                                                        <span>Koding</span>
+                                                    </label>
+                                                    <label class="choice-option" for="hobbySwimming">
+                                                        <input type="checkbox" class="form-check-input" id="hobbySwimming" name="hobbies" value="Berenang">
+                                                        <span>Berenang</span>
+                                                    </label>
+                                                    <label class="choice-option" for="hobbyDrawing">
+                                                        <input type="checkbox" class="form-check-input" id="hobbyDrawing" name="hobbies" value="Menggambar">
+                                                        <span>Menggambar</span>
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                            <div class="col-12 form-actions">
+                                                <button class="btn btn-accent" type="button" id="nextFormSlide">Lanjutkan <span aria-hidden="true">→</span></button>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section class="form-slide" aria-labelledby="formTitle" aria-hidden="true" inert>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="email">Alamat email</label>
+                                                <input class="form-control" id="email" name="email" type="email" placeholder="nama@email.com" required>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label" for="tagInput">Tag minat <span class="label-hint">Tekan Enter untuk menambahkan</span></label>
+                                                <input class="form-control" id="tagInput" type="text" placeholder="Contoh: touring, klasik, modifikasi">
+                                                <div class="tag-list" id="tagList" aria-live="polite" aria-label="Daftar tag minat"></div>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label" for="story">Ceritakan perjalanan impianmu</label>
+                                                <textarea class="form-control" id="story" name="story" rows="3" placeholder="Rute mana yang ingin kamu jelajahi?"></textarea>
+                                            </div>
+                                            <fieldset class="col-12">
+                                                <legend class="form-label">Pilih pengalaman favorit</legend>
+                                                <div class="choice-row">
+                                                    <label class="choice-option" for="motorsport">
+                                                        <input type="radio" class="form-check-input" id="motorsport" name="experience" value="Motorsport" required>
+                                                        <span>Motorsport</span>
+                                                    </label>
+                                                    <label class="choice-option" for="horizon">
+                                                        <input type="radio" class="form-check-input" id="horizon" name="experience" value="Open road">
+                                                        <span>Open road</span>
+                                                    </label>
+                                                    <label class="choice-option" for="both">
+                                                        <input type="radio" class="form-check-input" id="both" name="experience" value="Keduanya">
+                                                        <span>Keduanya</span>
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="vehicle">Kategori kendaraan</label>
+                                                <select class="form-select" id="vehicle" name="vehicle" required>
+                                                    <option value="" selected disabled>Pilih kategori</option>
+                                                    <option>Mobil sport</option>
+                                                    <option>Mobil klasik</option>
+                                                    <option>Motor</option>
+                                                    <option>Kendaraan lainnya</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="region">Lokasi berkendara</label>
+                                                <select class="form-select" id="region" name="region" required>
+                                                    <option value="" selected disabled>Pilih area</option>
+                                                    <option>Dalam kota</option>
+                                                    <option>Jalan pegunungan</option>
+                                                    <option>Sirkuit</option>
+                                                    <option>Lintas kota</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 form-actions">
+                                                <button class="btn btn-outline-light" type="button" id="previousFormSlide"><span aria-hidden="true">←</span> Kembali</button>
+                                                <button class="btn btn-accent" type="submit">Kirim ceritaku <span aria-hidden="true">↗</span></button>
+                                                <p class="form-message mb-0" id="formMessage" role="status"></p>
+                                            </div>
+                                        </div>
+                                    </section>
                                 </div>
                             </div>
                         </form>

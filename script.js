@@ -2,7 +2,63 @@ const tagInput = document.querySelector("#tagInput");
 const tagList = document.querySelector("#tagList");
 const joinForm = document.querySelector("#joinForm");
 const formMessage = document.querySelector("#formMessage");
+const formSlides = [...document.querySelectorAll(".form-slide")];
+const formSlider = document.querySelector(".form-slides");
+const formTitle = document.querySelector("#formTitle");
+const formStepNumber = document.querySelector("#formStepNumber");
+const nextFormSlide = document.querySelector("#nextFormSlide");
+const previousFormSlide = document.querySelector("#previousFormSlide");
 const tags = new Set();
+let activeFormSlide = 0;
+
+function showFormSlide(index) {
+    const activeSlide = formSlides[index];
+    activeSlide.inert = false;
+    activeSlide.setAttribute("aria-hidden", "false");
+    activeFormSlide = index;
+    formSlider.classList.toggle("is-second-step", index === 1);
+    formTitle.textContent = index === 0 ? "Profil pengendara" : "Ceritakan perjalananmu";
+    formStepNumber.textContent = `0${index + 1}`;
+
+    formSlides.forEach((slide, slideIndex) => {
+        const isActive = slideIndex === index;
+        if (!isActive) {
+            slide.setAttribute("aria-hidden", "true");
+            slide.inert = true;
+        }
+    });
+
+    const firstControl = activeSlide.querySelector("input, select, textarea, button");
+    if (firstControl) {
+        firstControl.focus();
+    }
+}
+
+function validateActiveFormSlide() {
+    const invalidField = [...formSlides[activeFormSlide].querySelectorAll("input, select, textarea")]
+        .find((field) => field.willValidate && !field.validity.valid);
+
+    if (invalidField) {
+        invalidField.reportValidity();
+        return false;
+    }
+
+    return true;
+}
+
+nextFormSlide.addEventListener("click", () => {
+    if (validateActiveFormSlide()) {
+        showFormSlide(1);
+    }
+});
+
+previousFormSlide.addEventListener("click", () => {
+    showFormSlide(0);
+});
+
+function normalizeTag(value) {
+    return value.trim().replace(/\s+/g, " ").toLowerCase();
+}
 
 function renderTags() {
     tagList.replaceChildren();
@@ -35,8 +91,8 @@ tagInput.addEventListener("keydown", (event) => {
     }
 
     event.preventDefault();
-    const tag = tagInput.value.trim().replace(/\s+/g, " ");
-    if (tag && !tags.has(tag.toLowerCase())) {
+    const tag = normalizeTag(tagInput.value);
+    if (tag && !tags.has(tag)) {
         tags.add(tag);
         renderTags();
     }
@@ -46,13 +102,19 @@ tagInput.addEventListener("keydown", (event) => {
 joinForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    if (!joinForm.reportValidity()) {
+    if (!validateActiveFormSlide()) {
+        return;
+    }
+
+    if (activeFormSlide === 0) {
+        showFormSlide(1);
         return;
     }
 
     const name = document.querySelector("#fullName").value.trim();
     const experience = new FormData(joinForm).get("experience");
-    formMessage.textContent = `Terima kasih, ${name}! Pilihan ${experience} sudah tercatat.`;
+    const city = document.querySelector("#city").value;
+    formMessage.textContent = `Terima kasih, ${name}! Ceritamu dari ${city} dengan pilihan ${experience} sudah tercatat.`;
 });
 
 joinForm.addEventListener("input", () => {
